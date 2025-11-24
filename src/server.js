@@ -4,11 +4,14 @@ const axios = require("axios");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "*",
+}));
 app.use(express.json());
 
 const API_KEY = process.env.YT_API_KEY;
 
+// ROUTE
 app.get("/api/songs/:mood", async (req, res) => {
   try {
     const { mood } = req.params;
@@ -32,5 +35,6 @@ app.get("/api/songs/:mood", async (req, res) => {
   }
 });
 
-const PORT = 5000;
+// IMPORTANT: Render PORT
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
